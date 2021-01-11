@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import * as Yup from "yup";
@@ -32,6 +32,7 @@ const validationSchema = Yup.object({
 });
 
 export default function PrimaryDataForm() {
+  const [hasErrors, setHasErrors] = useState(false);
   let history = useHistory();
 
   return (
@@ -50,79 +51,108 @@ export default function PrimaryDataForm() {
         history.push("/choosing");
       }}
     >
-      {(formik) => (
-        <Form className="primary-data-form">
-          <div className="form-container-group">
-            <Field
-              className="form-container-group__select"
-              name="kindIdentifier"
-              component="select"
-            >
-              <option value="dni">DNI</option>
-              <option value="libreta">Libreta militar</option>
-            </Field>
-            <div className="form-container-group__input--right">
-              <label className="label" htmlFor="identifier">
-                Nro. de documento
-              </label>
-              <Field id="identifier" name="identifier" placeholder="87654321" />
+      {(formik) => {
+        if (formik.isSubmitting && !formik.isValid) {
+          setHasErrors(true);
+        }
+
+        return (
+          <Form className="primary-data-form">
+            <div className="form-container-group">
+              <Field
+                className="form-container-group__select"
+                name="kindIdentifier"
+                component="select"
+              >
+                <option value="dni">DNI</option>
+                <option value="libreta">Libreta militar</option>
+              </Field>
+              <div className="form-container-group__input--right">
+                <label className="label" htmlFor="identifier">
+                  Nro. de documento
+                </label>
+                <Field
+                  id="identifier"
+                  name="identifier"
+                  placeholder="87654321"
+                />
+              </div>
             </div>
-          </div>
+            {hasErrors && formik.errors.identifier ? (
+              <span className="form-error">{formik.errors.identifier}</span>
+            ) : null}
 
-          <div className="form-container">
-            <label className="label" htmlFor="birthDate">
-              Fecha de nacimiento
-            </label>
-            <Field
-              id="birthDate"
-              name="birthDate"
-              type="date"
-              placeholder="Fecha de nacimiento"
-            />
-          </div>
+            <div className="form-container">
+              <label className="label" htmlFor="birthDate">
+                Fecha de nacimiento
+              </label>
+              <Field
+                id="birthDate"
+                name="birthDate"
+                type="date"
+                placeholder="Fecha de nacimiento"
+              />
+            </div>
+            {hasErrors && formik.errors.birthDate ? (
+              <span className="form-error">{formik.errors.birthDate}</span>
+            ) : null}
 
-          <div className="form-container">
-            <label className="label" htmlFor="cellphone">
-              Celular
-            </label>
-            <Field
-              id="cellphone"
-              name="cellphone"
-              type="tel"
-              placeholder="123456789"
-            />
-          </div>
+            <div className="form-container">
+              <label className="label" htmlFor="cellphone">
+                Celular
+              </label>
+              <Field
+                id="cellphone"
+                name="cellphone"
+                type="tel"
+                placeholder="123456789"
+              />
+            </div>
+            {hasErrors && formik.errors.cellphone ? (
+              <span className="form-error">{formik.errors.cellphone}</span>
+            ) : null}
 
-          <div>
-            <label className="checkbox-label">
-              Acepto la{" "}
-              <span className="underlined">
-                {" "}
-                Política de Protección de Datos Personales y los Términos y
-                Condiciones.
-              </span>
-              <Field type="checkbox" name="agreeWithDataPolicy" />
-              <span className="checkbox-custom"></span>
-            </label>
-          </div>
+            <div className="mt-20">
+              <label className="checkbox-label">
+                Acepto la{" "}
+                <span className="underlined">
+                  {" "}
+                  Política de Protección de Datos Personales y los Términos y
+                  Condiciones.
+                </span>
+                <Field type="checkbox" name="agreeWithDataPolicy" />
+                <span className="checkbox-custom"></span>
+              </label>
+              {hasErrors && formik.errors.agreeWithDataPolicy ? (
+                <span className="form-error">
+                  {formik.errors.agreeWithDataPolicy}
+                </span>
+              ) : null}
+            </div>
 
-          <div className="mb-35">
-            <label className="checkbox-label">
-              Acepto la{" "}
-              <span className="underlined">
-                {" "}
-                Política de Envío de Comunicaciones Comerciales.
-              </span>
-              <Field type="checkbox" name="agreeWithCommunicationPolicy" />
-              <span className="checkbox-custom"></span>
-            </label>
-          </div>
+            <div className="mb-35 mt-20">
+              <label className="checkbox-label">
+                Acepto la{" "}
+                <span className="underlined">
+                  {" "}
+                  Política de Envío de Comunicaciones Comerciales.
+                </span>
+                <Field type="checkbox" name="agreeWithCommunicationPolicy" />
+                <span className="checkbox-custom"></span>
+              </label>
+              {hasErrors && formik.errors.agreeWithCommunicationPolicy ? (
+                <span className="form-error">
+                  {formik.errors.agreeWithCommunicationPolicy}
+                </span>
+              ) : null}
+            </div>
 
-          <button className="btn" type="submit">
-            COMENCEMOS
-          </button>
-        </Form>
-      )}
+            <button className="btn" type="submit">
+              COMENCEMOS
+            </button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }
