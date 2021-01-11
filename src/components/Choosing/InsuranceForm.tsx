@@ -146,6 +146,11 @@ export default function InsuranceForm() {
                       />
                     </div>
                   </div>
+                  {formik.errors.identifier ? (
+                    <span className="form-error">
+                      {formik.errors.identifier}
+                    </span>
+                  ) : null}
 
                   <div className="form-container">
                     <label className="label" htmlFor="name">
@@ -153,6 +158,9 @@ export default function InsuranceForm() {
                     </label>
                     <Field id="name" name="name" placeholder="Nombres" />
                   </div>
+                  {formik.errors.name ? (
+                    <span className="form-error">{formik.errors.name}</span>
+                  ) : null}
 
                   <div className="form-container">
                     <label className="label" htmlFor="faherLastname">
@@ -164,6 +172,11 @@ export default function InsuranceForm() {
                       placeholder="Apellido paterno"
                     />
                   </div>
+                  {formik.errors.faherLastname ? (
+                    <span className="form-error">
+                      {formik.errors.faherLastname}
+                    </span>
+                  ) : null}
 
                   <div className="form-container">
                     <label className="label" htmlFor="motherLastname">
@@ -175,6 +188,11 @@ export default function InsuranceForm() {
                       placeholder="Apellido Materno"
                     />
                   </div>
+                  {formik.errors.motherLastname ? (
+                    <span className="form-error">
+                      {formik.errors.motherLastname}
+                    </span>
+                  ) : null}
 
                   <div className="form-container">
                     <label className="label" htmlFor="birthDate">
@@ -187,9 +205,14 @@ export default function InsuranceForm() {
                       placeholder="Fecha de nacimiento"
                     />
                   </div>
+                  {formik.errors.birthDate ? (
+                    <span className="form-error">
+                      {formik.errors.birthDate}
+                    </span>
+                  ) : null}
 
                   <div></div>
-                  <div role="group" aria-labelledby="gender" className="mb-20">
+                  <div role="group" aria-labelledby="gender" className="mt-20">
                     <p className="mb-20">Género</p>
                     <label className="radiobutton mb-15">
                       Masculino
@@ -202,8 +225,11 @@ export default function InsuranceForm() {
                       <span className="checkmark"></span>
                     </label>
                   </div>
+                  {formik.errors.gender ? (
+                    <span className="form-error">{formik.errors.gender}</span>
+                  ) : null}
 
-                  <div role="group" aria-labelledby="insured" className="mb-20">
+                  <div role="group" aria-labelledby="insured" className="mt-20">
                     <p className="mb-20">¿A quién vamos a asegurar?</p>
                     <label className="radiobutton mb-10">
                       Solo a mí
@@ -216,7 +242,11 @@ export default function InsuranceForm() {
                       <span className="checkmark"></span>
                     </label>
                   </div>
-                  <div className="flex justify-end">
+                  {formik.errors.insured ? (
+                    <span className="form-error">{formik.errors.insured}</span>
+                  ) : null}
+
+                  <div className="flex justify-end mt-20">
                     <button
                       type="button"
                       onClick={goNextStep}
