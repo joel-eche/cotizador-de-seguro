@@ -22,7 +22,9 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Campo requerido"),
   faherLastname: Yup.string().required("Campo requerido"),
   motherLastname: Yup.string().required("Campo requerido"),
-  birthDate: Yup.date().max(new Date()).required("Campo requerido"),
+  birthDate: Yup.date()
+    .max(new Date(), "La fecha no puede ser mayor al día de hoy")
+    .required("Campo requerido"),
   gender: Yup.string().required("Campo requerido"),
   insured: Yup.string().required("Campo requerido"),
   plan: Yup.string().required("Campo requerido"),
@@ -95,7 +97,6 @@ export default function InsuranceForm() {
             values: Person,
             { setSubmitting }: FormikHelpers<Person>
           ) => {
-            console.log(JSON.stringify(values, null, 2));
             history.push("/choosing");
           }}
         >

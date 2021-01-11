@@ -18,7 +18,9 @@ const validationSchema = Yup.object({
     .length(8, "Introduzca una identificación válida")
     .matches(/[0-9]{8}/, { message: "Introduzca una identificación válida" })
     .required("Campo requerido"),
-  birthDate: Yup.date().max(new Date()).required("Required"),
+  birthDate: Yup.date()
+    .max(new Date(), "La fecha no puede ser mayor al día de hoy")
+    .required("Required"),
   cellphone: Yup.string()
     .length(9, "Introduzca un número válido")
     .matches(/[0-9]{9}/, { message: "Introduzca un número válido" })
@@ -47,7 +49,6 @@ export default function PrimaryDataForm() {
       }}
       validationSchema={validationSchema}
       onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-        console.log(JSON.stringify(values, null, 2));
         history.push("/choosing");
       }}
     >
