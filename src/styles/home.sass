@@ -1,0 +1,102 @@
+@import 'constants.sass'
+
+.main
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  min-height: 100vh
+
+.separator-section
+  height: 90vh
+  min-height: 480px
+  background-image: url(./../images/slick.png), url(./../images/base.png)
+  background-position: 100% bottom, left center
+  background-repeat: no-repeat, no-repeat
+  background-size: 50% 50%, 80% 100%
+
+.hero-section
+  display: flex
+  flex-direction: column
+  height: 90vh
+  min-height: 480px
+  padding: 0 0 0 20%
+  background-color: $primary
+  color: $white
+
+  h1
+    font-size: 35px
+    margin-bottom: 20px
+
+  li
+    margin-bottom: 17px
+    font-size: 15px
+
+  .hero-icon
+    width: 20px
+    margin-right: 10px
+
+  .hero-section__info
+    display: flex
+    flex-direction: column
+    justify-content: center
+    flex-grow: 1
+    padding-top: 10%
+
+  .hero-section__copyright
+    padding-bottom: 10%
+    font-size: 12px
+
+    span
+      color: $primary-light
+
+.form-section
+  grid-column-start: 3
+  padding: 20% 20% 20%  10%
+
+// primary data form
+
+.primary-data-form
+  padding: 25px 0
+
+// checkbox
+
+.checkbox-label
+  display: block
+  position: relative
+  padding-left: 30px
+  margin-bottom: 15px
+  cursor: pointer
+  font-size: 10px
+
+input[type=checkbox]
+  visibility: hidden
+
+.checkbox-custom
+  position: absolute
+  top: 0
+  left: 0
+  height: 20px
+  width: 20px
+  background-color: $white
+  border: 1px solid $gray-light
+  border-radius: 5px
+  &:after
+    content: ""
+    position: absolute
+    display: none
+
+.checkbox-label input:checked ~ .checkbox-custom
+  background-color: $green
+
+.checkbox-label input:checked ~ .checkbox-custom:after
+  display: block
+
+.checkbox-label .checkbox-custom:after
+  left: 6px
+  bottom: 4px
+  width: 6px
+  height: 12px
+  border: solid white
+  border-width: 0 2px 2px 0
+  -webkit-transform: rotate(45deg)
+  -ms-transform: rotate(45deg)
+  transform: rotate(45deg)

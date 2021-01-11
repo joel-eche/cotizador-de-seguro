@@ -1,0 +1,151 @@
+@import 'constants.sass'
+
+.main-choosing
+  display: grid
+  grid-template-columns: 1fr 5fr
+  min-height: 100vh
+
+.separator-choosing-section
+  height: 90vh
+  min-height: 480px
+  background-image: url(./../images/slick.png), url(./../images/base.png)
+  background-position: 100% bottom, left center
+  background-repeat: no-repeat, no-repeat
+  background-size: 50% 50%, 80% 100%
+
+.form-choosing-section
+  grid-column-start: 2
+  padding: 10% 30%
+
+// radiobutton
+
+.radiobutton
+  display: block
+  align-items: center
+  position: relative
+  padding-left: 25px
+  cursor: pointer
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+  input
+    position: absolute
+    opacity: 0
+    cursor: pointer
+
+  input:checked ~ .checkmark
+    background-color: $green
+    height: 10px
+    width: 10px
+    margin-left: 2px
+    margin-top: 6px
+    -webkit-box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 3px $green
+    box-shadow: 0px 0px 0px 2px $white, 0px 0px 0px 3px $green
+
+  &:after
+    content: ""
+    position: absolute
+    display: none
+
+  input:checked ~ .checkmark:after
+    display: block
+
+.checkmark
+  position: absolute
+  top: 0
+  left: 0
+  height: 14px
+  width: 14px
+  margin-top: 4px
+  border: 1px solid $green
+  background-color: $white
+  border-radius: 50%
+
+// plans
+
+.plans
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  width: 100%
+
+.checkbox-plan, .checkbox-plan--active
+  display: flex
+  position: relative
+  min-width: 100px
+  min-height: 100px
+  border-radius: 5px
+  padding: 5px
+  margin-bottom: 20px
+  cursor: pointer
+
+  .checkbox-plan__description
+    display: flex
+    flex-grow: 1
+    height: 100%
+    flex-direction: column
+    justify-content: center
+
+  .check-icon
+    right: 10
+    height: 20px
+
+  input
+    position: absolute
+    opacity: 0
+    cursor: pointer
+
+.checkbox-plan
+  border: 2px solid $gray-light
+
+.checkbox-plan--active
+  border: 2px solid $green
+
+.card-plan
+  border: 2px solid $gray-light
+  border-radius: 5px
+  margin-bottom: 20px
+
+  &__body
+    padding: 20px
+
+  &__header
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 40px
+    background-color: $gray-light
+    color: $gray
+    font-size: 12px
+
+  &__max, &__offer
+    padding: 20px 0
+
+  &__max
+    display: flex
+    border-bottom: 2px solid $gray-light
+
+    &__detail
+      display: flex
+      flex-direction: column
+      flex-grow: 1
+      border-right: 2px solid $gray-light
+
+    img
+      max-width: 100px
+      margin-left: 20px
+
+  &__offer li
+    display: flex
+    align-items: center
+    margin-bottom: 20px
+    font-size: 12px
+
+    span
+      margin-left: 10px
+
+    .unavailable
+      text-decoration: line-through
+      color: $gray-light
